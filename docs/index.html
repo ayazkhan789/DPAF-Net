@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="DPAF-Net: Dual-Pattern Learning for Fire–Smoke Instance Segmentation with a Large-Scale Dataset. Pattern Recognition 2026.">
+  <meta property="og:title" content="DPAF-Net: Dual-Pattern Learning for Fire–Smoke Instance Segmentation"/>
+  <meta property="og:description" content="A novel instance segmentation framework that separates fire and smoke via a Dual-Pattern Encoder and Adaptive Fusion Module, achieving 40.2% AP at 17.2 FPS."/>
+  <meta property="og:image" content="static/images/overview_of_dataset_on_different_condition.png"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="fire detection, smoke detection, instance segmentation, deep learning, DPAF-Net, dual-pattern encoder, adaptive fusion">
+
+  <title>DPAF-Net | Fire &amp; Smoke Instance Segmentation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar is-black" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow:1; justify-content:center;">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" style="color:#fff;">Sections</a>
+        <div class="navbar-dropdown" style="background:#1a1a1a;">
+          <a class="navbar-item" href="#abstract">Abstract</a>
+          <a class="navbar-item" href="#architecture">Architecture</a>
+          <a class="navbar-item" href="#dataset">Dataset</a>
+          <a class="navbar-item" href="#results">Qualitative Results</a>
+          <a class="navbar-item" href="#videos">Video Demo</a>
+          <a class="navbar-item" href="#quantitative">Quantitative Results</a>
+          <a class="navbar-item" href="#citation">Citation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero dpaf-hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <div class="venue-badge">Pattern Recognition &nbsp;&middot;&nbsp; Elsevier &nbsp;&middot;&nbsp; 2026</div>
+
+          <h1 class="title is-2 publication-title" style="margin-top:0.6rem;">
+            DPAF-Net: Dual-Pattern Learning for Fire&ndash;Smoke Instance Segmentation<br>with a Large-Scale Dataset
+          </h1>
+
+          <div class="is-size-5 publication-authors" style="margin-top:1rem;">
+            <span class="author-block">Muhammad Ayaz<sup>1</sup>,</span>
+            <span class="author-block">Sareer ul Amin<sup>1</sup>,</span>
+            <span class="author-block">Hikmat Yar<sup>2</sup>,</span>
+            <span class="author-block">Salman Khan<sup>3</sup>,</span>
+            <span class="author-block">Wonseop Shin<sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="mailto:sanghyun@cau.ac.kr" target="_blank">Sanghyun Seo<sup>1,*</sup></a>
+            </span>
+          </div>
+
+          <div class="is-size-6 publication-authors" style="margin-top:0.5rem; color:#ccc;">
+            <sup>1</sup> Chung-Ang University, Republic of Korea &nbsp;|&nbsp;
+            <sup>2</sup> KAIST, Republic of Korea &nbsp;|&nbsp;
+            <sup>3</sup> Oxford Brookes University, United Kingdom
+            <br>
+            <small style="color:#aaa;"><sup>*</sup> Corresponding Author &nbsp;&middot;&nbsp; sanghyun@cau.ac.kr</small>
+          </div>
+
+          <div class="column has-text-centered" style="margin-top:1.2rem;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper (Soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code (Soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-database"></i></span>
+                  <span>Dataset (Soon)</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+          <div class="tldr-box">
+            <b>tl;dr</b>&nbsp; DPAF-Net explicitly separates fire (high-freq 3&times;3 kernels) and smoke
+            (low-freq 5&times;5/7&times;7 kernels) via a Dual-Pattern Encoder, fuses them with pixel-wise
+            softmax attention, and achieves <b>40.2% AP at 17.2 FPS</b> on a new 7,917-image
+            dual-class dataset &mdash; the largest instance-level fire &amp; smoke benchmark to date.
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABSTRACT ===================== -->
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-heading">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Uncontrolled fire and smoke events cause thousands of fatalities and billions in infrastructure damage annually,
+            yet existing automated detection systems still lack the precision needed for life-critical response. Existing
+            segmentation methods rely on shared feature representations that conflate fire's high-frequency textures and
+            smoke's diffuse, semi-transparent structures, while semantic approaches lack instance-level discrimination and
+            datasets remain limited to single-class annotations.
+          </p>
+          <p>
+            We introduce <b>DPAF-Net</b>, a novel instance segmentation framework built on three components:
+            a <b>Dual-Pattern Encoder (DPE)</b> with fire-specific 3&times;3 kernels and smoke-specific large-kernel
+            convolutions (5&times;5, 7&times;7) for complementary feature extraction; an <b>Adaptive Fusion Module (AFM)</b>
+            with pixel-wise softmax attention to dynamically weight fire and smoke features per spatial location;
+            and a <b>DCNv2-enhanced ResNet-50 backbone</b> for adaptive modeling of irregular boundaries.
+          </p>
+          <p>
+            DPAF-Net achieves <b>40.2% AP at 17.2 FPS</b>, outperforming the best baseline by +5.2% AP, with
+            strong boundary precision (AP<sub>75</sub>: 40.0%), small-object detection (AP<sub>S</sub>: 30.4%),
+            and a mean AP of 45.1%. We further release a large-scale dataset of <b>7,917 images</b> with dual-class
+            instance-level annotations across diverse real-world environments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HIGHLIGHTS ===================== -->
+<section class="section dpaf-dark-section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-heading has-text-centered" style="color:#fff;">Highlights</h2>
+    <div class="columns is-centered is-multiline highlight-grid">
+      <div class="column is-one-third-desktop is-half-tablet">
+        <div class="highlight-card">
+          <div class="highlight-icon"><i class="fas fa-fire"></i></div>
+          <h4>Dual-Pattern Encoder</h4>
+          <p>Separates fire (3&times;3) and smoke (5&times;5, 7&times;7) representations across all FPN levels via parallel branches.</p>
+        </div>
+      </div>
+      <div class="column is-one-third-desktop is-half-tablet">
+        <div class="highlight-card">
+          <div class="highlight-icon"><i class="fas fa-layer-group"></i></div>
+          <h4>Adaptive Fusion Module</h4>
+          <p>Pixel-wise softmax attention dynamically integrates complementary fire and smoke features per spatial location.</p>
+        </div>
+      </div>
+      <div class="column is-one-third-desktop is-half-tablet">
+        <div class="highlight-card">
+          <div class="highlight-icon"><i class="fas fa-tachometer-alt"></i></div>
+          <h4>40.2% AP &middot; 17.2 FPS</h4>
+          <p>+5.2% AP over the best baseline with real-time throughput on a single NVIDIA RTX 4090.</p>
+        </div>
+      </div>
+      <div class="column is-one-third-desktop is-half-tablet">
+        <div class="highlight-card">
+          <div class="highlight-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+          <h4>DCNv2 Backbone</h4>
+          <p>Deformable ResNet-50 (Stages 2&ndash;4) adapts receptive fields to irregular flame and smoke boundaries.</p>
+        </div>
+      </div>
+      <div class="column is-one-third-desktop is-half-tablet">
+        <div class="highlight-card">
+          <div class="highlight-icon"><i class="fas fa-database"></i></div>
+          <h4>7,917-Image Dataset</h4>
+          <p>Largest dual-class instance segmentation dataset for fire &amp; smoke with polygon-level annotations.</p>
+        </div>
+      </div>
+      <div class="column is-one-third-desktop is-half-tablet">
+        <div class="highlight-card">
+          <div class="highlight-icon"><i class="fas fa-search"></i></div>
+          <h4>Instance-Level Precision</h4>
+          <p>Counts and delineates individual fire seats and smoke plumes &mdash; impossible with semantic methods.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ARCHITECTURE ===================== -->
+<section class="section" id="architecture">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-heading has-text-centered">Architecture</h2>
+
+    <div class="arch-pipeline">
+      <div class="arch-block arch-block-input">Input Image</div>
+      <div class="arch-arrow">&#9660;</div>
+      <div class="arch-block arch-block-backbone">DCNv2-Enhanced ResNet-50<br><small>Stages 2&ndash;4: Deformable Convolution</small></div>
+      <div class="arch-arrow">&#9660; {C2, C3, C4, C5}</div>
+      <div class="arch-block arch-block-fpn">Feature Pyramid Network (FPN)<br><small>5 levels P2&ndash;P6 &middot; 256 channels each</small></div>
+      <div class="arch-arrow">&#9660;</div>
+      <div class="arch-split">
+        <div class="arch-branch arch-branch-fire">
+          <div class="arch-branch-label">Fire Branch</div>
+          3&times;3 kernels<br><small>High-freq textures, sharp edges</small>
+        </div>
+        <div class="arch-branch-label-mid">DPE</div>
+        <div class="arch-branch arch-branch-smoke">
+          <div class="arch-branch-label">Smoke Branch</div>
+          5&times;5 / 7&times;7 kernels<br><small>Low-freq diffuse patterns</small>
+        </div>
+      </div>
+      <div class="arch-arrow">&#9660;</div>
+      <div class="arch-block arch-block-afm">Adaptive Fusion Module (AFM)<br><small>3-Stage Spatial Attention &middot; Pixel-wise Softmax</small></div>
+      <div class="arch-arrow">&#9660;</div>
+      <div class="arch-block arch-block-head">CondInst Dynamic Mask Head<br><small>169 dynamic parameters per instance</small></div>
+      <div class="arch-arrow">&#9660;</div>
+      <div class="arch-block arch-block-output">Instance Masks + Bounding Boxes</div>
+    </div>
+
+    <div class="content has-text-justified" style="margin-top:2rem;">
+      <p>
+        The <b>Dual-Pattern Encoder (DPE)</b> processes FPN features through two parallel branches: a fire branch
+        employing 3&times;3 convolutions to capture high-frequency textures and color gradients, and a smoke branch using
+        large-kernel convolutions (5&times;5, 7&times;7) to model low-frequency, dispersed, semi-transparent patterns.
+        Both branches include Pattern-Specific Channel Attention (PSCA) for per-branch recalibration (256&rarr;16&rarr;256, r=16).
+      </p>
+      <p>
+        The <b>Adaptive Fusion Module (AFM)</b> applies a 3-stage spatial attention mechanism that generates
+        pixel-wise fusion weights via softmax normalization, enabling the network to adaptively emphasize fire or
+        smoke features at each spatial location &mdash; particularly effective in scenes where both classes coexist or overlap.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DATASET ===================== -->
+<section class="section dpaf-dark-section" id="dataset">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-heading has-text-centered" style="color:#fff;">Dataset Overview</h2>
+    <p class="has-text-centered" style="color:#ccc; margin-bottom:2rem;">
+      7,917 images &middot; Dual-class instance annotations (fire + smoke) &middot; Polygon masks &middot;
+      Indoor / Outdoor / Industrial / Wildfire / Vehicle scenes
+    </p>
+
+    <div class="columns is-centered dataset-stats">
+      <div class="column has-text-centered stat-card">
+        <div class="stat-number">7,917</div>
+        <div class="stat-label">Total Images</div>
+      </div>
+      <div class="column has-text-centered stat-card">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Classes</div>
+      </div>
+      <div class="column has-text-centered stat-card">
+        <div class="stat-number">Instance</div>
+        <div class="stat-label">Annotation Level</div>
+      </div>
+      <div class="column has-text-centered stat-card">
+        <div class="stat-number">Polygon</div>
+        <div class="stat-label">Mask Type</div>
+      </div>
+    </div>
+
+    <div class="columns is-multiline is-centered" style="margin-top:1.5rem;">
+
+      <div class="column is-half">
+        <figure class="image dataset-figure">
+          <img src="static/images/overview_of_dataset_on_different_condition.png"
+               alt="Dataset overview across different conditions">
+          <figcaption>Dataset overview &mdash; diverse conditions</figcaption>
+        </figure>
+      </div>
+
+      <div class="column is-half">
+        <figure class="image dataset-figure">
+          <img src="static/images/induertrail_fire.png"
+               alt="Industrial fire scenes">
+          <figcaption>Industrial fire scenes</figcaption>
+        </figure>
+      </div>
+
+      <div class="column is-one-third">
+        <figure class="image dataset-figure">
+          <img src="static/images/indoor_house_fire.png"
+               alt="Indoor house fire">
+          <figcaption>Indoor / house fire</figcaption>
+        </figure>
+      </div>
+
+      <div class="column is-one-third">
+        <figure class="image dataset-figure">
+          <img src="static/images/foregest fire_images.png"
+               alt="Forest wildfire">
+          <figcaption>Forest &amp; wildfire</figcaption>
+        </figure>
+      </div>
+
+      <div class="column is-one-third">
+        <figure class="image dataset-figure">
+          <img src="static/images/fire_on_viechil_images.png"
+               alt="Fire on vehicles">
+          <figcaption>Vehicle fire</figcaption>
+        </figure>
+      </div>
+
+      <div class="column is-full">
+        <figure class="image dataset-figure">
+          <img src="static/images/complex_and_abimous_sence.png"
+               alt="Complex and ambiguous scenes">
+          <figcaption>Complex &amp; visually ambiguous scenes (overlapping fire/smoke, background clutter, extreme lighting)</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUALITATIVE RESULTS ===================== -->
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-heading has-text-centered">Qualitative Results</h2>
+
+    <div class="columns is-multiline is-centered">
+
+      <div class="column is-full">
+        <figure class="image result-figure">
+          <img src="static/images/visual_results_of_ours_model_on_the_GT_show_only_fire.png"
+               alt="DPAF-Net predictions vs ground truth (fire)">
+          <figcaption>DPAF-Net predictions vs. ground truth &mdash; fire instances. Our model accurately delineates individual flame regions under varying scale, illumination, and background complexity.</figcaption>
+        </figure>
+      </div>
+
+      <div class="column is-half">
+        <figure class="image result-figure">
+          <img src="static/images/comparsense_stat_of_art_modal.png"
+               alt="Comparison with state-of-the-art methods">
+          <figcaption>Comparison with state-of-the-art methods</figcaption>
+        </figure>
+      </div>
+
+      <div class="column is-half">
+        <figure class="image result-figure">
+          <img src="static/images/All_dataset_with_all_models.png"
+               alt="All models on full dataset">
+          <figcaption>All evaluated models on the DPAF-Net dataset</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VIDEO DEMO ===================== -->
+<section class="section dpaf-dark-section" id="videos">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-heading has-text-centered" style="color:#fff;">Video Demos</h2>
+    <p class="has-text-centered" style="color:#ccc; margin-bottom:2rem;">
+      Input video (left) &nbsp;vs.&nbsp; DPAF-Net segmentation output (right)
+    </p>
+
+    <div id="video-carousel" class="carousel results-carousel">
+
+      <div class="item">
+        <div class="columns is-gapless video-pair">
+          <div class="column"><p class="video-label">Input</p>
+            <video autoplay muted loop playsinline><source src="static/videos/input%20video/1019680630-preview.mp4" type="video/mp4"></video></div>
+          <div class="column"><p class="video-label output-label">DPAF-Net Output</p>
+            <video autoplay muted loop playsinline><source src="static/videos/output%20-video/1019680630-preview_output.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="columns is-gapless video-pair">
+          <div class="column"><p class="video-label">Input</p>
+            <video autoplay muted loop playsinline><source src="static/videos/input%20video/3538186949-preview.mp4" type="video/mp4"></video></div>
+          <div class="column"><p class="video-label output-label">DPAF-Net Output</p>
+            <video autoplay muted loop playsinline><source src="static/videos/output%20-video/3538186949-preview_output.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="columns is-gapless video-pair">
+          <div class="column"><p class="video-label">Input</p>
+            <video autoplay muted loop playsinline><source src="static/videos/input%20video/3620257141-preview.mp4" type="video/mp4"></video></div>
+          <div class="column"><p class="video-label output-label">DPAF-Net Output</p>
+            <video autoplay muted loop playsinline><source src="static/videos/output%20-video/3620257141-preview_output.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="columns is-gapless video-pair">
+          <div class="column"><p class="video-label">Input</p>
+            <video autoplay muted loop playsinline><source src="static/videos/input%20video/3670538059-preview.mp4" type="video/mp4"></video></div>
+          <div class="column"><p class="video-label output-label">DPAF-Net Output</p>
+            <video autoplay muted loop playsinline><source src="static/videos/output%20-video/3670538059-preview_output.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="columns is-gapless video-pair">
+          <div class="column is-full"><p class="video-label output-label">DPAF-Net Output</p>
+            <video autoplay muted loop playsinline style="width:100%;"><source src="static/videos/output%20-video/3686006383-preview_output.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="columns is-gapless video-pair">
+          <div class="column is-full"><p class="video-label output-label">DPAF-Net Output</p>
+            <video autoplay muted loop playsinline style="width:100%;"><source src="static/videos/output%20-video/3835795281-preview_output.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="columns is-gapless video-pair">
+          <div class="column"><p class="video-label">Input</p>
+            <video autoplay muted loop playsinline><source src="static/videos/input%20video/3861581387-preview.mp4" type="video/mp4"></video></div>
+          <div class="column"><p class="video-label output-label">DPAF-Net Output</p>
+            <video autoplay muted loop playsinline><source src="static/videos/output%20-video/3861581387-preview_output.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="columns is-gapless video-pair">
+          <div class="column"><p class="video-label">Input</p>
+            <video autoplay muted loop playsinline><source src="static/videos/input%20video/3924349409-preview.mp4" type="video/mp4"></video></div>
+          <div class="column"><p class="video-label output-label">DPAF-Net Output</p>
+            <video autoplay muted loop playsinline><source src="static/videos/output%20-video/3924349409-preview_output.mp4" type="video/mp4"></video></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUANTITATIVE RESULTS ===================== -->
+<section class="section" id="quantitative">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-heading has-text-centered">Quantitative Results</h2>
+
+    <h3 class="title is-5" style="margin-top:1.5rem;">Component Ablation Study</h3>
+    <div class="table-container">
+      <table class="table is-striped is-hoverable is-fullwidth dpaf-table">
+        <thead>
+          <tr>
+            <th>Baseline</th><th>DPE</th><th>AFM</th>
+            <th>AP</th><th>AP<sub>50</sub></th><th>AP<sub>75</sub></th>
+            <th>AP<sub>S</sub></th><th>AP<sub>M</sub></th><th>AP<sub>L</sub></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>&#10003;</td><td></td><td></td><td>34.2</td><td>60.8</td><td>34.3</td><td>24.8</td><td>28.4</td><td>49.3</td></tr>
+          <tr><td>&#10003;</td><td>&#10003;</td><td></td><td>38.4</td><td>64.9</td><td>38.6</td><td>28.2</td><td>32.9</td><td>54.2</td></tr>
+          <tr><td>&#10003;</td><td></td><td>&#10003;</td><td>36.6</td><td>62.7</td><td>36.2</td><td>26.3</td><td>30.5</td><td>51.6</td></tr>
+          <tr class="dpaf-best-row"><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td><b>40.2</b></td><td><b>66.6</b></td><td><b>40.0</b></td><td><b>30.4</b></td><td><b>36.2</b></td><td><b>57.1</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="title is-5" style="margin-top:2rem;">Dataset Comparison</h3>
+    <div class="table-container">
+      <table class="table is-striped is-hoverable is-fullwidth dpaf-table">
+        <thead>
+          <tr><th>Dataset</th><th>Images</th><th>Fire</th><th>Smoke</th><th>Mask Type</th><th>Level</th><th>Year</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>BoWFire</td><td>226</td><td>&#10003;</td><td></td><td>Binary</td><td>Semantic</td><td>2015</td></tr>
+          <tr><td>FESB MLID</td><td>400</td><td>&#10003;</td><td>&#10003;</td><td>Binary</td><td>Semantic</td><td>2017</td></tr>
+          <tr><td>SMOKE5K</td><td>5,400</td><td></td><td>&#10003;</td><td>Binary</td><td>Semantic</td><td>2022</td></tr>
+          <tr><td>FSSD</td><td>1,968</td><td>&#10003;</td><td>&#10003;</td><td>Binary</td><td>Semantic</td><td>2023</td></tr>
+          <tr><td>FLAME</td><td>2,003</td><td>&#10003;</td><td></td><td>Binary</td><td>Semantic</td><td>2023</td></tr>
+          <tr><td>IoT-Fire</td><td>11,000</td><td>&#10003;</td><td></td><td>Binary</td><td>Semantic</td><td>2023</td></tr>
+          <tr class="dpaf-best-row">
+            <td><b>Ours (DPAF-Net)</b></td><td><b>7,917</b></td><td><b>&#10003;</b></td><td><b>&#10003;</b></td>
+            <td><b>Polygon</b></td><td><b>Instance</b></td><td><b>2026</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="title is-5" style="margin-top:2rem;">Implementation Summary</h3>
+    <div class="table-container">
+      <table class="table is-striped is-hoverable is-fullwidth dpaf-table">
+        <tbody>
+          <tr><th>Framework</th><td>MMDetection + PyTorch</td><th>GPU</th><td>NVIDIA RTX 4090 (24 GB)</td></tr>
+          <tr><th>Backbone</th><td>ResNet-50 + DCNv2 (Stages 2&ndash;4)</td><th>FPN Channels</th><td>256 (P2&ndash;P6)</td></tr>
+          <tr><th>Optimizer</th><td>AdamW (lr=1e-4, wd=0.05)</td><th>Batch Size</th><td>8</td></tr>
+          <tr><th>Input Size</th><td>1333 &times; 800</td><th>Inference FPS</th><td>17.2</td></tr>
+          <tr><th>Loss</th><td colspan="3">Focal (&alpha;=0.25, &gamma;=2.5) + GIoU + BCE + Dice</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CITATION ===================== -->
+<section class="section dpaf-dark-section" id="citation">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-heading has-text-centered" style="color:#fff;">Citation</h2>
+    <p class="has-text-centered" style="color:#ccc; margin-bottom:1.5rem;">If you find this work useful, please cite:</p>
+    <div class="bibtex-box">
+      <pre><code>@article{ayaz2026dpafnet,
+  title   = {DPAF-Net: Dual-Pattern Learning for Fire--Smoke Instance
+             Segmentation with a Large-Scale Dataset},
+  author  = {Ayaz, Muhammad and Amin, Sareer ul and Yar, Hikmat
+             and Khan, Salman and Shin, Wonseop and Seo, Sanghyun},
+  journal = {Pattern Recognition},
+  year    = {2026},
+  publisher = {Elsevier}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer" style="background:#111;">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered" style="color:#aaa;">
+          <p>
+            <b style="color:#fff;">DPAF-Net</b> &nbsp;&middot;&nbsp; Pattern Recognition, Elsevier &nbsp;&middot;&nbsp; 2026<br>
+            Chung-Ang University &nbsp;|&nbsp; KAIST &nbsp;|&nbsp; Oxford Brookes University
+          </p>
+          <p>
+            Page built using the
+            <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" style="color:#e67e22;">
+              Academic Project Page Template</a>.
+            Licensed under
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" style="color:#e67e22;">CC BY-SA 4.0</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
