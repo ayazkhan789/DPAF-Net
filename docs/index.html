@@ -534,57 +534,91 @@
       </div>
     </div>
 
-    <div class="columns is-multiline is-centered" style="margin-top:1.5rem;">
-
-      <div class="column is-half">
+    <!-- Dataset Overview Image -->
+    <div class="columns is-centered" style="margin-top:1.5rem;">
+      <div class="column is-full">
         <figure class="image dataset-figure">
-          <img src="https://drive.google.com/thumbnail?id=1au9M5lQ1Pcfl6VoqWJI_oiWzxQ-GAOpI&sz=w1200"
-               alt="Dataset overview across different conditions">
-          <figcaption>Dataset overview &mdash; diverse conditions</figcaption>
+          <img src="https://drive.google.com/thumbnail?id=1jS5NvpZcEt3ou2G31IGPaDF8DeCzB9lT&sz=w1200"
+                       alt="Dataset overview across different conditions">
+          <figcaption>Dataset overview &mdash; diverse conditions across all scene categories</figcaption>
         </figure>
       </div>
+    </div>
+
+    <!-- Dataset Comparison Table -->
+    <h3 class="title is-5 has-text-centered" style="margin-top:2.5rem; color:#fff;">Dataset Comparison</h3>
+    <div class="table-container" style="margin-top:1rem;">
+      <table class="table is-striped is-hoverable is-fullwidth dpaf-table">
+        <thead>
+          <tr><th>Dataset</th><th>Images</th><th>Fire</th><th>Smoke</th><th>Mask Type</th><th>Level</th><th>Year</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>BoWFire</td><td>226</td><td>&#10003;</td><td></td><td>Binary</td><td>Semantic</td><td>2015</td></tr>
+          <tr><td>FESB MLID</td><td>400</td><td>&#10003;</td><td>&#10003;</td><td>Binary</td><td>Semantic</td><td>2017</td></tr>
+          <tr><td>SMOKE5K</td><td>5,400</td><td></td><td>&#10003;</td><td>Binary</td><td>Semantic</td><td>2022</td></tr>
+          <tr><td>FSSD</td><td>1,968</td><td>&#10003;</td><td>&#10003;</td><td>Binary</td><td>Semantic</td><td>2023</td></tr>
+          <tr><td>FLAME</td><td>2,003</td><td>&#10003;</td><td></td><td>Binary</td><td>Semantic</td><td>2023</td></tr>
+          <tr><td>IoT-Fire</td><td>11,000</td><td>&#10003;</td><td></td><td>Binary</td><td>Semantic</td><td>2023</td></tr>
+          <tr class="dpaf-best-row">
+            <td><b>Ours (DPAF-Net)</b></td><td><b>7,917</b></td><td><b>&#10003;</b></td><td><b>&#10003;</b></td>
+            <td><b>Polygon</b></td><td><b>Instance</b></td><td><b>2026</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Visual Results on Different Conditions -->
+    <h3 class="title is-5 has-text-centered" style="margin-top:2.5rem; color:#fff;">
+      DPAF-Net Visual Results &mdash; Diverse Conditions &amp; Scenarios
+    </h3>
+    <p class="has-text-centered" style="color:#ccc; margin-bottom:1.5rem; font-size:0.95rem;">
+      Our model predictions across industrial, indoor, wildfire, vehicle, and complex scenes
+    </p>
+
+    <div class="columns is-multiline is-centered">
 
       <div class="column is-half">
         <figure class="image dataset-figure">
-          <img src="https://drive.google.com/thumbnail?id=1VzUnWZQqyigWpAey93B7UlmCD6A598JW&sz=w1200"
+          <img src="https://drive.google.com/thumbnail?id=1EbwmcAUjlLOpsGz8PV178qmkdPBZqSi3&sz=w1200"
                alt="Industrial fire scenes">
-          <figcaption>Industrial fire scenes</figcaption>
+          <figcaption>🏭 Industrial fire scenes</figcaption>
         </figure>
       </div>
 
-      <div class="column is-one-third">
+      <div class="column is-half">
         <figure class="image dataset-figure">
-          <img src="https://drive.google.com/thumbnail?id=12On3WOSKSP_Q9Zw_R21715tRB_wwMfPp&sz=w1200"
+          <img src="https://drive.google.com/thumbnail?id=1yYKarxoqIFniEBHn7BEP3GkLkZp4oHOt&sz=w1200"
                alt="Indoor house fire">
-          <figcaption>Indoor / house fire</figcaption>
+          <figcaption>🏠 Indoor / house fire</figcaption>
         </figure>
       </div>
 
-      <div class="column is-one-third">
+      <div class="column is-half">
         <figure class="image dataset-figure">
           <img src="https://drive.google.com/thumbnail?id=1VisvP78cITUSl95TjRJtV0YXqMAokwBs&sz=w1200"
                alt="Forest wildfire">
-          <figcaption>Forest &amp; wildfire</figcaption>
+          <figcaption>🌲 Forest &amp; wildfire</figcaption>
         </figure>
       </div>
 
-      <div class="column is-one-third">
+      <div class="column is-half">
         <figure class="image dataset-figure">
-          <img src="https://drive.google.com/thumbnail?id=18yh7BJVk0cWE3kJ8LhspRWvFsv5y1O_i&sz=w1200"
+          <img src="https://drive.google.com/thumbnail?id=12On3WOSKSP_Q9Zw_R21715tRB_wwMfPp&sz=w1200"
                alt="Fire on vehicles">
-          <figcaption>Vehicle fire</figcaption>
+          <figcaption>🚗 Vehicle fire</figcaption>
         </figure>
       </div>
 
       <div class="column is-full">
         <figure class="image dataset-figure">
-          <img src="https://drive.google.com/thumbnail?id=1yYKarxoqIFniEBHn7BEP3GkLkZp4oHOt&sz=w1200"
+          <img src="https://drive.google.com/thumbnail?id=1VzUnWZQqyigWpAey93B7UlmCD6A598JW&sz=w1200"
                alt="Complex and ambiguous scenes">
-          <figcaption>Complex &amp; visually ambiguous scenes (overlapping fire/smoke, background clutter, extreme lighting)</figcaption>
+          <figcaption>⚠️ Complex &amp; visually ambiguous scenes — overlapping fire/smoke, background clutter, extreme lighting</figcaption>
         </figure>
       </div>
 
     </div>
+
   </div>
 </section>
 
@@ -597,7 +631,7 @@
 
       <div class="column is-full">
         <figure class="image result-figure">
-          <img src="https://drive.google.com/thumbnail?id=1EbwmcAUjlLOpsGz8PV178qmkdPBZqSi3&sz=w1200"
+          <img src="https://drive.google.com/thumbnail?id=1R-QkcBdAWIo1o061uMhPST6SHVBiaJcI&sz=w1200"
                alt="DPAF-Net predictions vs ground truth (fire)">
           <figcaption>DPAF-Net predictions vs. ground truth &mdash; fire instances. Our model accurately delineates individual flame regions under varying scale, illumination, and background complexity.</figcaption>
         </figure>
@@ -605,7 +639,7 @@
 
       <div class="column is-half">
         <figure class="image result-figure">
-          <img src="https://drive.google.com/thumbnail?id=1jS5NvpZcEt3ou2G31IGPaDF8DeCzB9lT&sz=w1200"
+          <img src="https://drive.google.com/thumbnail?id=1VzUnWZQqyigWpAey93B7UlmCD6A598JW&sz=w1200"
                alt="Comparison with state-of-the-art methods">
           <figcaption>Comparison with state-of-the-art methods</figcaption>
         </figure>
@@ -775,27 +809,6 @@
           <tr><td>&#10003;</td><td>&#10003;</td><td></td><td>38.4</td><td>64.9</td><td>38.6</td><td>28.2</td><td>32.9</td><td>54.2</td></tr>
           <tr><td>&#10003;</td><td></td><td>&#10003;</td><td>36.6</td><td>62.7</td><td>36.2</td><td>26.3</td><td>30.5</td><td>51.6</td></tr>
           <tr class="dpaf-best-row"><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td><b>40.2</b></td><td><b>66.6</b></td><td><b>40.0</b></td><td><b>30.4</b></td><td><b>36.2</b></td><td><b>57.1</b></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3 class="title is-5" style="margin-top:2rem;">Dataset Comparison</h3>
-    <div class="table-container">
-      <table class="table is-striped is-hoverable is-fullwidth dpaf-table">
-        <thead>
-          <tr><th>Dataset</th><th>Images</th><th>Fire</th><th>Smoke</th><th>Mask Type</th><th>Level</th><th>Year</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>BoWFire</td><td>226</td><td>&#10003;</td><td></td><td>Binary</td><td>Semantic</td><td>2015</td></tr>
-          <tr><td>FESB MLID</td><td>400</td><td>&#10003;</td><td>&#10003;</td><td>Binary</td><td>Semantic</td><td>2017</td></tr>
-          <tr><td>SMOKE5K</td><td>5,400</td><td></td><td>&#10003;</td><td>Binary</td><td>Semantic</td><td>2022</td></tr>
-          <tr><td>FSSD</td><td>1,968</td><td>&#10003;</td><td>&#10003;</td><td>Binary</td><td>Semantic</td><td>2023</td></tr>
-          <tr><td>FLAME</td><td>2,003</td><td>&#10003;</td><td></td><td>Binary</td><td>Semantic</td><td>2023</td></tr>
-          <tr><td>IoT-Fire</td><td>11,000</td><td>&#10003;</td><td></td><td>Binary</td><td>Semantic</td><td>2023</td></tr>
-          <tr class="dpaf-best-row">
-            <td><b>Ours (DPAF-Net)</b></td><td><b>7,917</b></td><td><b>&#10003;</b></td><td><b>&#10003;</b></td>
-            <td><b>Polygon</b></td><td><b>Instance</b></td><td><b>2026</b></td>
-          </tr>
         </tbody>
       </table>
     </div>
