@@ -5,7 +5,7 @@
   <meta name="description" content="DPAF-Net: Dual-Pattern Learning for Fire–Smoke Instance Segmentation with a Large-Scale Dataset. Pattern Recognition 2026.">
   <meta property="og:title" content="DPAF-Net: Dual-Pattern Learning for Fire–Smoke Instance Segmentation"/>
   <meta property="og:description" content="A novel instance segmentation framework that separates fire and smoke via a Dual-Pattern Encoder and Adaptive Fusion Module, achieving 40.2% AP at 17.2 FPS."/>
-  <meta property="og:image" content="https://drive.google.com/thumbnail?id=1_2BKVH9ypwdkYEXPL2bpfDWMZxtfYGuj&sz=w1200"/>
+  <meta property="og:image" content="https://drive.google.com/thumbnail?id=1au9M5lQ1Pcfl6VoqWJI_oiWzxQ-GAOpI&sz=w1200"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="keywords" content="fire detection, smoke detection, instance segmentation, deep learning, DPAF-Net, dual-pattern encoder, adaptive fusion">
 
@@ -24,6 +24,259 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+
+  <style>
+    /* ===== GLOBAL MOBILE FIXES ===== */
+    * { box-sizing: border-box; }
+
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* ===== NAVBAR MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .navbar-menu {
+        display: block !important;
+        background: #111;
+        padding: 0.5rem 0;
+      }
+      .navbar-start {
+        flex-direction: column;
+      }
+      .navbar-item.has-dropdown {
+        width: 100%;
+      }
+      .navbar-link {
+        width: 100%;
+        display: block;
+        padding: 0.75rem 1rem;
+      }
+      .navbar-dropdown {
+        position: static !important;
+        display: block !important;
+        background: #1a1a1a !important;
+        box-shadow: none;
+        padding: 0;
+      }
+      .navbar-dropdown .navbar-item {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* ===== HERO / TITLE MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .publication-title {
+        font-size: 1.4rem !important;
+        line-height: 1.4 !important;
+      }
+      .is-size-5.publication-authors {
+        font-size: 0.95rem !important;
+      }
+      .is-size-6.publication-authors {
+        font-size: 0.8rem !important;
+      }
+      .venue-badge {
+        font-size: 0.75rem !important;
+        padding: 0.3rem 0.8rem !important;
+      }
+      .tldr-box {
+        font-size: 0.9rem !important;
+        padding: 1rem !important;
+        margin: 1rem 0.5rem 0 !important;
+        text-align: left;
+      }
+      .publication-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+      .publication-links .link-block {
+        margin: 0 !important;
+      }
+    }
+
+    /* ===== SECTION HEADINGS MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .title.is-3.section-heading {
+        font-size: 1.4rem !important;
+      }
+      .title.is-5 {
+        font-size: 1rem !important;
+      }
+      .section {
+        padding: 2rem 1rem !important;
+      }
+    }
+
+    /* ===== HIGHLIGHT CARDS MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .highlight-grid .column {
+        width: 100% !important;
+        padding: 0.4rem !important;
+      }
+      .highlight-card {
+        padding: 1rem !important;
+        font-size: 0.9rem !important;
+      }
+      .highlight-icon {
+        font-size: 1.5rem !important;
+      }
+    }
+
+    /* ===== ARCHITECTURE PIPELINE MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .arch-pipeline {
+        padding: 0 0.5rem;
+      }
+      .arch-block {
+        font-size: 0.8rem !important;
+        padding: 0.6rem 0.8rem !important;
+        margin: 0 auto 0 auto !important;
+        width: 95% !important;
+      }
+      .arch-split {
+        flex-direction: column !important;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .arch-branch {
+        width: 90% !important;
+        font-size: 0.8rem !important;
+        padding: 0.6rem !important;
+      }
+      .arch-branch-label-mid {
+        font-size: 0.9rem !important;
+        padding: 0.3rem 0.8rem !important;
+      }
+      .arch-arrow {
+        font-size: 0.9rem !important;
+      }
+    }
+
+    /* ===== DATASET STATS MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .dataset-stats {
+        flex-wrap: wrap !important;
+      }
+      .dataset-stats .column {
+        width: 50% !important;
+        padding: 0.4rem !important;
+      }
+      .stat-number {
+        font-size: 1.5rem !important;
+      }
+      .stat-label {
+        font-size: 0.75rem !important;
+      }
+      .stat-card {
+        padding: 0.75rem 0.5rem !important;
+        margin: 0.25rem !important;
+      }
+    }
+
+    /* ===== DATASET / RESULT FIGURES MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .columns.is-multiline .column.is-half,
+      .columns.is-multiline .column.is-one-third,
+      .columns.is-multiline .column.is-full {
+        width: 100% !important;
+        padding: 0.5rem 0 !important;
+      }
+      .dataset-figure,
+      .result-figure {
+        margin-bottom: 1rem !important;
+      }
+      .dataset-figure img,
+      .result-figure img {
+        border-radius: 6px;
+        width: 100%;
+        height: auto;
+      }
+      .dataset-figure figcaption,
+      .result-figure figcaption {
+        font-size: 0.8rem !important;
+        padding: 0.4rem 0 !important;
+      }
+    }
+
+    /* ===== VIDEO CAROUSEL MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .video-pair {
+        flex-direction: column !important;
+      }
+      .video-pair .column {
+        width: 100% !important;
+        padding: 0.25rem 0 !important;
+      }
+      .video-pair iframe {
+        height: 220px !important;
+        width: 100% !important;
+      }
+      .video-label {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.25rem !important;
+      }
+      #video-carousel .item {
+        padding: 0.5rem !important;
+      }
+    }
+
+    /* ===== TABLES MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .table-container {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+      }
+      .dpaf-table {
+        font-size: 0.75rem !important;
+        min-width: 500px;
+      }
+      .dpaf-table th,
+      .dpaf-table td {
+        padding: 0.4rem 0.5rem !important;
+        white-space: nowrap;
+      }
+    }
+
+    /* ===== CITATION / BIBTEX MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .bibtex-box {
+        font-size: 0.75rem !important;
+        padding: 1rem !important;
+        overflow-x: auto;
+      }
+      .bibtex-box pre {
+        white-space: pre-wrap !important;
+        word-break: break-word !important;
+      }
+    }
+
+    /* ===== FOOTER MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      footer .content p {
+        font-size: 0.8rem !important;
+      }
+    }
+
+    /* ===== TABLET (769px - 1023px) ===== */
+    @media screen and (min-width: 769px) and (max-width: 1023px) {
+      .publication-title {
+        font-size: 1.6rem !important;
+      }
+      .video-pair iframe {
+        height: 280px !important;
+      }
+      .arch-branch {
+        font-size: 0.85rem !important;
+      }
+      .dpaf-table {
+        font-size: 0.85rem !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -74,7 +327,7 @@
             <span class="author-block">Salman Khan<sup>3</sup>,</span>
             <span class="author-block">Wonseop Shin<sup>1</sup>,</span>
             <span class="author-block">
-              <a href="/cdn-cgi/l/email-protection#0f7c6e616867767a614f6c6e7a216e6c21647d" target="_blank">Sanghyun Seo<sup>1,*</sup></a>
+              <a href="mailto:sanghyun@cau.ac.kr" target="_blank">Sanghyun Seo<sup>1,*</sup></a>
             </span>
           </div>
 
@@ -83,7 +336,7 @@
             <sup>2</sup> KAIST, Republic of Korea &nbsp;|&nbsp;
             <sup>3</sup> Oxford Brookes University, United Kingdom
             <br>
-            <small style="color:#aaa;"><sup>*</sup> Corresponding Author &nbsp;&middot;&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="46352728212e3f332806252733682725682d34">[email&#160;protected]</a></small>
+            <small style="color:#aaa;"><sup>*</sup> Corresponding Author &nbsp;&middot;&nbsp; sanghyun@cau.ac.kr</small>
           </div>
 
           <div class="column has-text-centered" style="margin-top:1.2rem;">
