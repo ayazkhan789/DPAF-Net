@@ -363,7 +363,7 @@
           </div>
 
           <div class="tldr-box">
-            <b>tl;dr</b>&nbsp; DPAF-Net explicitly separates fire (high-freq 3&times;3 kernels) and smoke
+            <b></b>&nbsp; DPAF-Net explicitly separates fire (high-freq 3&times;3 kernels) and smoke
             (low-freq 5&times;5/7&times;7 kernels) via a Dual-Pattern Encoder, fuses them with pixel-wise
             softmax attention, and achieves <b>40.2% AP at 17.2 FPS</b> on a new 7,917-image
             dual-class dataset &mdash; the largest instance-level fire &amp; smoke benchmark to date.
@@ -383,20 +383,15 @@
         <h2 class="title is-3 section-heading">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Uncontrolled fire and smoke events cause thousands of fatalities and billions in infrastructure damage annually,
-            yet existing automated detection systems still lack the precision needed for life-critical response. Existing
-            segmentation methods rely on shared feature representations that conflate fire's high-frequency textures and
-            smoke's diffuse, semi-transparent structures, while semantic approaches lack instance-level discrimination and
-            datasets remain limited to single-class annotations.
-          </p>
-          <p>
+            Reliable and real-time detection of fire and smoke is essential for mitigating risks to human life and infrastructure,
+            particularly under complex real-world conditions. Existing segmentation methods rely on shared feature representations
+            that conflate fire's high-frequency textures and  smoke's diffuse, semi-transparent structures, while semantic approaches 
+            lack instance-level discrimination and datasets remain limited to single-class annotations.                
             We introduce <b>DPAF-Net</b>, a novel instance segmentation framework built on three components:
             a <b>Dual-Pattern Encoder (DPE)</b> with fire-specific 3&times;3 kernels and smoke-specific large-kernel
             convolutions (5&times;5, 7&times;7) for complementary feature extraction; an <b>Adaptive Fusion Module (AFM)</b>
             with pixel-wise softmax attention to dynamically weight fire and smoke features per spatial location;
-            and a <b>DCNv2-enhanced ResNet-50 backbone</b> for adaptive modeling of irregular boundaries.
-          </p>
-          <p>
+            and a <b>DCNv2-enhanced ResNet-50 backbone</b> for adaptive modeling of irregular boundaries.                
             DPAF-Net achieves <b>40.2% AP at 17.2 FPS</b>, outperforming the best baseline by +5.2% AP, with
             strong boundary precision (AP<sub>75</sub>: 40.0%), small-object detection (AP<sub>S</sub>: 30.4%),
             and a mean AP of 45.1%. We further release a large-scale dataset of <b>7,917 images</b> with dual-class
@@ -622,7 +617,7 @@
   </div>
 </section>
 
-<!-- ===================== QUALITATIVE RESULTS ===================== -->
+<!-- ===================== Comparison with Competing Methods ===================== -->
 <section class="section" id="results">
   <div class="container is-max-desktop">
     <h2 class="title is-3 section-heading has-text-centered">Qualitative Results</h2>
@@ -638,7 +633,7 @@ coverage across scales for fire and smoke.</figcaption>
         </figure>
       </div>
 
-      <div class="column is-half">
+      <div class="column is-full">
         <figure class="image result-figure">
           <img src="https://drive.google.com/thumbnail?id=1au9M5lQ1Pcfl6VoqWJI_oiWzxQ-GAOpI&sz=w1200"
                alt="Comparison with state-of-the-art methods">
@@ -722,38 +717,18 @@ fine-tuning, showing robustness to diverse conditions and scales.</figcaption>
         <div class="columns is-gapless video-pair">
           <div class="column">
             <p class="video-label">Input</p>
-            <iframe src="https://drive.google.com/file/d/1C2q8vjou2DMcP1YJ99OrD3is3BctZiPG/preview"
+            <iframe src="https://drive.google.com/file/d/1HAS2JarJBTMqANe8n7Kf5ev7jJYY5h-N/preview"
               width="100%" height="360" allow="autoplay" style="border:none;"></iframe>
           </div>
           <div class="column">
             <p class="video-label output-label">DPAF-Net Output</p>
-            <iframe src="https://drive.google.com/file/d/1_Flg3KBc33vS6and6uVEAdM0k2kS1gMG/preview"
+            <iframe src="https://drive.google.com/file/d/1p-Voctv8D9DXPym2RUCBN7TlpqYsaZb6/preview"
               width="100%" height="360" allow="autoplay" style="border:none;"></iframe>
           </div>
         </div>
       </div>
 
-      <!-- Output only 5 -->
-      <div class="item">
-        <div class="columns is-gapless video-pair">
-          <div class="column is-full">
-            <p class="video-label output-label">DPAF-Net Output</p>
-            <iframe src="https://drive.google.com/file/d/1RZBf-V-AcsXqL2rlT7I_0ViFT7Jnoy9T/preview"
-              width="100%" height="360" allow="autoplay" style="border:none;"></iframe>
-          </div>
-        </div>
-      </div>
-
-      <!-- Output only 6 -->
-      <div class="item">
-        <div class="columns is-gapless video-pair">
-          <div class="column is-full">
-            <p class="video-label output-label">DPAF-Net Output</p>
-            <iframe src="https://drive.google.com/file/d/1buoWPnW89iB2EfP4CgJgXc-lT4HdmtJl/preview"
-              width="100%" height="360" allow="autoplay" style="border:none;"></iframe>
-          </div>
-        </div>
-      </div>
+         
 
       <!-- Pair 7 -->
       <div class="item">
@@ -765,7 +740,7 @@ fine-tuning, showing robustness to diverse conditions and scales.</figcaption>
           </div>
           <div class="column">
             <p class="video-label output-label">DPAF-Net Output</p>
-            <iframe src="https://drive.google.com/file/d/1p-Voctv8D9DXPym2RUCBN7TlpqYsaZb6/preview"
+            <iframe src="https://drive.google.com/file/d/1buoWPnW89iB2EfP4CgJgXc-lT4HdmtJl/preview"
               width="100%" height="360" allow="autoplay" style="border:none;"></iframe>
           </div>
         </div>
@@ -791,44 +766,7 @@ fine-tuning, showing robustness to diverse conditions and scales.</figcaption>
   </div>
 </section>
 
-<!-- ===================== QUANTITATIVE RESULTS ===================== -->
-<section class="section" id="quantitative">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 section-heading has-text-centered">Quantitative Results</h2>
 
-    <h3 class="title is-5" style="margin-top:1.5rem;">Component Ablation Study</h3>
-    <div class="table-container">
-      <table class="table is-striped is-hoverable is-fullwidth dpaf-table">
-        <thead>
-          <tr>
-            <th>Baseline</th><th>DPE</th><th>AFM</th>
-            <th>AP</th><th>AP<sub>50</sub></th><th>AP<sub>75</sub></th>
-            <th>AP<sub>S</sub></th><th>AP<sub>M</sub></th><th>AP<sub>L</sub></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>&#10003;</td><td></td><td></td><td>34.2</td><td>60.8</td><td>34.3</td><td>24.8</td><td>28.4</td><td>49.3</td></tr>
-          <tr><td>&#10003;</td><td>&#10003;</td><td></td><td>38.4</td><td>64.9</td><td>38.6</td><td>28.2</td><td>32.9</td><td>54.2</td></tr>
-          <tr><td>&#10003;</td><td></td><td>&#10003;</td><td>36.6</td><td>62.7</td><td>36.2</td><td>26.3</td><td>30.5</td><td>51.6</td></tr>
-          <tr class="dpaf-best-row"><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td><b>40.2</b></td><td><b>66.6</b></td><td><b>40.0</b></td><td><b>30.4</b></td><td><b>36.2</b></td><td><b>57.1</b></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3 class="title is-5" style="margin-top:2rem;">Implementation Summary</h3>
-    <div class="table-container">
-      <table class="table is-striped is-hoverable is-fullwidth dpaf-table">
-        <tbody>
-          <tr><th>Framework</th><td>MMDetection + PyTorch</td><th>GPU</th><td>NVIDIA RTX 4090 (24 GB)</td></tr>
-          <tr><th>Backbone</th><td>ResNet-50 + DCNv2 (Stages 2&ndash;4)</td><th>FPN Channels</th><td>256 (P2&ndash;P6)</td></tr>
-          <tr><th>Optimizer</th><td>AdamW (lr=1e-4, wd=0.05)</td><th>Batch Size</th><td>8</td></tr>
-          <tr><th>Input Size</th><td>1333 &times; 800</td><th>Inference FPS</th><td>17.2</td></tr>
-          <tr><th>Loss</th><td colspan="3">Focal (&alpha;=0.25, &gamma;=2.5) + GIoU + BCE + Dice</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
 
 <!-- ===================== CITATION ===================== -->
 <section class="section dpaf-dark-section" id="citation">
@@ -841,9 +779,7 @@ fine-tuning, showing robustness to diverse conditions and scales.</figcaption>
              Segmentation with a Large-Scale Dataset},
   author  = {Ayaz, Muhammad and Amin, Sareer ul and Yar, Hikmat
              and Khan, Salman and Shin, Wonseop and Seo, Sanghyun},
-  journal = {Pattern Recognition},
-  year    = {2026},
-  publisher = {Elsevier}
+ 
 }</code></pre>
     </div>
   </div>
@@ -865,5 +801,6 @@ fine-tuning, showing robustness to diverse conditions and scales.</figcaption>
               Academic Project Page Template</a>.
             Licensed under
             <a rel="license" href="http://creativecommons.org/licens
+
 
 
